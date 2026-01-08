@@ -1,6 +1,7 @@
+
 ## Write a function to find the second largest number in an array.
 
-
+```c
 #include <stdio.h>
 #include <limits.h>
 
@@ -33,16 +34,17 @@ int main(void) {
 
     return 0;
 }
-
+```
 
 ## Implement a custom strlen() function using pointers.
 
+```c
 #include <stdio.h>
 
 size_t my_strlen(const char *str) {
     const char *p = str;  // pointer to traverse
     while (*p++ != '\0') {}
-    return (size_t)(p - str-1);  // length = difference in addresses
+    return (size_t)(p - str - 1);  // length = difference in addresses
 }
 
 int main(void) {
@@ -50,9 +52,11 @@ int main(void) {
     printf("Length of \"%s\" = %zu\n", text, my_strlen(text));
     return 0;
 }
+```
 
 ## How would you reverse a string using only pointers?
 
+```c
 #include <stdio.h>
 
 /* Reverses the string in place using only pointers.
@@ -92,16 +96,17 @@ int main(void) {
     printf("orig: \"%s\"  rev: \"%s\"\n", buf3, str_reverse(buf3));
     return 0;
 }
+```
 
 ## Write a function to count the number of set bits in an integer.
 
-
+```c
 #include <stdio.h>
 
 unsigned int count_set_bits(unsigned int n) {
     unsigned int count = 0;
     while (n) {
-        n &= (n - 1); // clear the lowest set bit 0101 & 01000 -> 01000 &0011
+        n &= (n - 1); // clear the lowest set bit
         count++;
     }
     return count;
@@ -112,29 +117,35 @@ int main(void) {
     printf("Number of set bits in %u = %u\n", num, count_set_bits(num));
     return 0;
 }
+```
 
 ## How do you reverse the bits of a number?
 
+```c
 #include <stdint.h>
 #include <stdio.h>
+
 /* Reverse bits of a 32-bit unsigned integer */
 uint32_t reverse_bits32_loop(uint32_t x) {
     uint32_t y = 0;
     for (int i = 0; i < 32; ++i) {
-        y = (y << 1) | (x & 1U);  // append LSB of x to y
-        x >>= 1;                  // drop LSB of x
+        y = (y << 1) | (x & 1U);
+        x >>= 1;
     }
     return y;
 }
+
 int main(void)
 {
-    int num = reverse_bits32_loop(0x5a5a5a00);
-    printf("Reverse: %x",num);
+    uint32_t num = reverse_bits32_loop(0x5a5a5a00);
+    printf("Reverse: %x\n", num);
     return 0;
 }
+```
 
 ## Clear/reset bits range
 
+```c
 #include <stdio.h>
 #include <stdint.h>
 
@@ -152,8 +163,11 @@ int main(void) {
     printf("After clearing bits %u..%u: 0x%X\n", l, r, result);
     return 0;
 }
+```
 
 ## Write a custom implementation of malloc().
+
+```c
 #include <stdio.h>
 #include <stdint.h>
 
@@ -207,5 +221,5 @@ int main(void) {
 
     return 0;
 }
-
+```
 
