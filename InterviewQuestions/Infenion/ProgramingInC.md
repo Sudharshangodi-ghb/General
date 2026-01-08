@@ -223,3 +223,92 @@ int main(void) {
 }
 ```
 
+## //create a single linked list 6nodes and insert a node at x pos if x>6 not posible , else updte the list 
+
+Head
+ ↓
++---+---+    +---+---+    +---+---+    +---+---+    +---+---+    +---+---+
+| 0 | o-|--> | 1 | o-|--> | 2 | o-|--> | 3 | o-|--> | 4 | o-|--> | 5 |NULL|
++---+---+    +---+---+    +---+---+    +---+---+    +---+---+    +---+---+
+
+Pos3,value 99
+
+Before:
+Head → 0 → 1 → 2 → 3 → 4 → 5
+
+After:
+Head → 0 → 1 → 99 → 2 → 3 → 4 → 5
+
+
+```c
+/ Online C compiler to run C program online
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+    int element; 
+    struct Node *Add; 
+};
+ 
+void printNodes(struct Node *head) {
+    while (head != NULL) {
+        printf("Node element %d\n", head->element);
+        head = head->Add;
+    }
+}
+ 
+void insertNode(struct Node **head, int pos, int value, int NoofNodes) {
+    if (pos > NoofNodes || pos < 1) {
+        printf("Insertion not possible at %d\n", pos);
+        return;
+    }
+ 
+    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->element = value;
+    newNode->Add = NULL;
+
+    if (pos == 1) { // Insert at head
+        newNode->Add = *head; *head = newNode; return;
+    }
+    
+    struct Node *temp = *head;
+    for (int i = 1; i < pos - 1 && temp != NULL; i++) {
+        temp = temp->Add;
+    }
+ 
+    newNode->Add = temp->Add;
+    temp->Add = newNode;
+}
+ 
+int main() {
+    // Write C code here
+    printf("Try programiz.pro\n");
+    struct Node *Head = NULL, *New, *temp;
+    int NoofNodes = 6;
+    for (int i = 0; i < NoofNodes; i++) {
+        New = (struct Node*)malloc(sizeof(struct Node));
+        New->element = i;
+        New->Add = NULL;
+ 
+        if (Head == NULL) {
+            Head = New;
+            temp = Head;
+        } else {
+            temp->Add = New;
+            temp = New;
+        }
+    }
+ 
+    printNodes(Head);
+ 
+    // Insert new node
+    int x = 3;
+    int elementValue=99;
+    insertNode(&Head, x, elementValue, NoofNodes);
+ 
+    printf("List after node Insertion %d:\n", x);
+    printNodes(Head);
+ 
+    return 0;
+}
+```
